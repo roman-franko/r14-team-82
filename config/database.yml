@@ -7,13 +7,19 @@
 default: &default
   adapter: postgresql
   encoding: unicode
+  host: localhost
   pool: 5
+  username: root
+  password: root
 
 development:
   <<: *default
+  database: r14-team-82_development
 
 test:
   <<: *default
+  database: r14-team-82_test
 
 production:
   <<: *default
+  database: r14-team-82_production
