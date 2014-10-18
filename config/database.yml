@@ -8,11 +8,11 @@ default: &default
 
 development:
   <<: *default
-  database: r14-team-82_development
+  database: r14_development
 
 test:
   <<: *default
-  database: r14-team-82_test
+  database: r14_test
 
 production:
   <<: *default
