@@ -11,13 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141018163451) do
+ActiveRecord::Schema.define(version: 20141018213146) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "entities", force: true do |t|
-    t.integer  "request_id"
     t.date     "start_date"
     t.date     "end_date"
     t.string   "headline"
@@ -29,6 +28,13 @@ ActiveRecord::Schema.define(version: 20141018163451) do
 
   create_table "requests", force: true do |t|
     t.text     "text"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "requests_entities", force: true do |t|
+    t.integer  "request_id"
+    t.integer  "entity_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
