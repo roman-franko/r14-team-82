@@ -15,3 +15,5 @@
 //= require turbolinks
 //= require_tree .
 //=require timelineJS/embed
+//= require jquery
+//= require bootstrap-sprockets
