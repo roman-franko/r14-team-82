@@ -7,5 +7,4 @@ FactoryGirl.define do
     text "MyText"
     media "MyString"
   end
-
 end
