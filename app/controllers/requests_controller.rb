@@ -5,7 +5,7 @@ class RequestsController < ApplicationController
 
   def create
     request = Request.create_with_entities! permitted_params
-    render json: request, status: :created
+    render json: request, scope: 'entities', status: :created
   end
 
   def show
