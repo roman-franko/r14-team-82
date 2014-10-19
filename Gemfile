@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.1.6'
 gem 'pg'
 gem 'active_model_serializers'
+#gem 'sqlite3'
 
 gem 'sass-rails', '~> 4.0.3'
 gem 'uglifier', '>= 1.3.0'
@@ -17,6 +18,8 @@ gem 'spring',        group: :development
 gem 'timelineJS-rails', '~> 1.1.5'
 gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
+gem 'wikipedia-client'
+gem 'wikicloth'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0.0'
