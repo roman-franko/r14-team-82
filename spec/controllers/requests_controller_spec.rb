@@ -2,10 +2,6 @@ require 'rails_helper'
 
 RSpec.describe RequestsController, :type => :controller do
 
-  before(:each) do
-    allow_any_instance_of(Request).to receive(:fetch_wiki_data).and_return([])
-  end
-
   describe "GET index" do
     before do
       create(:request)
@@ -21,6 +17,11 @@ RSpec.describe RequestsController, :type => :controller do
   end
 
   describe "POST create" do
+
+    before(:each) do
+      allow_any_instance_of(Request).to receive(:fetch_wiki_data).and_return({})
+    end
+
     context 'success' do
       it "returns http success" do
         post :create, request_string: 'C++, Java, Ruby'

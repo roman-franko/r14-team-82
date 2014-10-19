@@ -7,7 +7,7 @@ class Request < ActiveRecord::Base
   validates :request_string, presence: true
 
   def self.create_with_entities!(params)
-    request = Request.new params
+    request = Request.create! params
     request.build_entities
     if request.entities.present?
       request
@@ -17,17 +17,32 @@ class Request < ActiveRecord::Base
   end
 
   def build_entities
-    w =  WikiParser.new
     entities_arr = request_string.split(',').map { |entity| entity.gsub(/(\A\s*)|(\s*\z)/, '') }
-    entities_arr.each do |entity|
-      w.load(entity)
-      if w.valid?
-        entities << Entity.create(start_date: w.start_date,
-          end_date: w.end_date,
-          headline: w.title,
-          text: w.title, #w.html,
-          media: w.url)
+    entities_arr.each do |entity_name|
+      unless entity = Entity.find_by_headline(entity_name)
+        if wiki_data = fetch_wiki_data(entity_name)
+          entity = Entity.create(wiki_data)
+        end
       end
+      entities << entity if entity
+    end
+  end
+
+  private
+
+  def fetch_wiki_data(entity_name)
+    w =  WikiParser.new
+    w.load(entity_name)
+    if w.valid?
+      {
+        start_date: w.start_date,
+        end_date: w.end_date,
+        headline: entity_name,
+        text: w.title, #w.html,
+        media: w.url
+      }
+    else
+      nil
     end
   end
 end

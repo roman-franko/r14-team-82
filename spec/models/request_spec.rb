@@ -33,16 +33,7 @@ RSpec.describe Request, :type => :model do
         media: 'http://ex.com'
       }
 
-      wiki_parser = instance_double("WikiParser",
-        start_date: '2014-10-18',
-        end_date: '',
-        title: '',
-        title: '',
-        html: '',
-        url: '')
-      allow_any_instance_of(WikiParser).to receive(:new).and_return(wiki_parser)
-      allow(wiki_parser).to receive(:load)
-      # allow(wiki_parser).to receive(:valid?).at_least(3).times.and_return(true)
+      allow_any_instance_of(Request).to receive(:fetch_wiki_data).and_return(data)
     end
 
     it 'creates entities' do
@@ -53,7 +44,14 @@ RSpec.describe Request, :type => :model do
 
     it 'request has two entities' do
       request = Request.create_with_entities! request_string: 'C++, Ruby'
-      expect(request.entities.count).to eq 2
+      expect(request.entities.size).to eq 2
+    end
+
+    it 'use exists entries' do
+      FactoryGirl.create :entity, headline: 'C++'
+      expect {
+        Request.create_with_entities! request_string: 'C++'
+      }.to change{ Entity.count }.by(0)
     end
 
   end
