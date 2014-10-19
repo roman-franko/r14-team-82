@@ -15,6 +15,8 @@ class WikiParser
 
   def load(title)
     @page = Wikipedia.find title
+    @start_date = nil
+    @end_date = nil
   end
 
   def title
@@ -26,11 +28,11 @@ class WikiParser
   end
 
   def start_date
-    date 'BIRTH'
+    @start_date ||= date 'BIRTH'
   end
 
   def end_date
-    date 'DEATH'
+    @end_date ||= date 'DEATH'
   end
 
   def html
@@ -38,10 +40,15 @@ class WikiParser
     @wiki.to_html
   end
 
+  def valid?
+    start_date.present? || end_date.present?
+  end
+
   private
 
   def date(event)
     s = @page.content
+    return nil if s.nil?
     date_string = s[/(?<=DATE OF #{event}) *= *[-,\w ]+/]
     date = nil
     if date_string
