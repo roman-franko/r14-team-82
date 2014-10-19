@@ -11,7 +11,7 @@ RSpec.describe RequestsController, :type => :controller do
     subject! { get :index }
 
     it { expect(response).to be_success }
-    it { expect(JSON.parse(response.body).size).to eq 2 }
+    it { p JSON.parse(response.body); expect(JSON.parse(response.body).size).to eq 2 }
     it { expect(JSON.parse(response.body).first).to include('id') }
   end
 

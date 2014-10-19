@@ -1,6 +1,6 @@
 class RequestsController < ApplicationController
   def index
-    render json: Request.all, status: :ok
+    render json: Request.all, root: false, status: :ok
   end
 
   def create
@@ -9,7 +9,7 @@ class RequestsController < ApplicationController
   end
 
   def show
-    render json: Request.find(params[:id]), status: :ok
+    render json: Request.find(params[:id]), root: false, status: :ok
   end
 
   private
