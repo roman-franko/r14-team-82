@@ -1,7 +1,66 @@
+function update_last_requests(){
+  $.get("requests", function( data ) {
+    var s = ''
+    $.each(data, function( index, value ) {
+      if (value.entities) {
+        s += "<a class = 'keyword'>"+value.entities+"</a>" + '; ';
+      }
+    });
+    s = s.substring(0, s.length - 2);
+    $('.last-requests').html( s );
+    $('.keyword').click(function() {
+      keywords = $( this ).text();
+      show_chronology(keywords);
+    });
+  });
+};
+
+function show_chronology(keywords) {
+  document.body.style.cursor  = 'wait';
+  $.post('requests',
+    { request_string:keywords },
+    function(data) {
+      document.body.style.cursor  = 'default';
+      if (data) {
+        var timeline = {
+          "timeline":
+           {
+           "headline":"Results for comparison",
+           "type":"default",
+           "text":"request entities",
+           "startDate":"2012,1,26",
+           "asset":
+              {
+                  "media":"/time-1.jpg",
+                  "credit":"",
+                  "caption":""
+              },
+               "date": [ ]
+           }
+        };
+
+        timeline.timeline.date =  $.parseJSON(data);
+
+        $("#time_line").empty();
+
+        createStoryJS({
+          type: 'timeline',
+          width: '100%',
+          height: '500',
+          source:  timeline,
+          embed_id: 'time_line'
+        });
+        update_last_requests();
+      }
+    },
+    'json'
+  );
+};
+
 $(document).ready(function() {
   var d = new Date();
   var today = d.getFullYear().toString() + "," + (d.getMonth() +1 ).toString() + "," + d.getDate().toString()
-  
+
   timeline = {
       "timeline":
        {
@@ -35,50 +94,9 @@ $(document).ready(function() {
 
     $('.show-chronology').click(function() {
       keywords = $('#timeline form textarea').val();
-      document.body.style.cursor  = 'wait';
-
-      $.post('requests',
-             { request_string:keywords },
-             function(data) {
-                document.body.style.cursor  = 'default';
-                if (data) {
-                      var timeline = {
-                        "timeline":
-                         {
-                         "headline":"Results for",
-                         "type":"default",
-                         "text":keywords ,
-                         "startDate":"2012,1,26",
-                         "asset":
-                            {
-                                "media":"/time-1.jpg",
-                                "credit":"",
-                                "caption":""
-                            },
-                             "date": [ ]
-                         }
-                      };
-
-                  timeline.timeline.date =  $.parseJSON(data);
-
-                  $("#time_line").empty();
-
-                  createStoryJS({
-                    type: 'timeline',
-                    width: '100%',
-                    height: '500',
-                    source:  timeline,
-                    embed_id: 'time_line'
-                  });
-                }
-             },
-             'json'
-           );
-
-      return false; // avoid to execute the actual submit of the form.
-
+      show_chronology(keywords);
+      return false;
     });
-
 
     createStoryJS({
       type: 'timeline',
@@ -88,5 +106,7 @@ $(document).ready(function() {
       source: timeline, //get the events.json format from https://github.com/VeriteCo/TimelineJS#file-formats
       embed_id: 'time_line'
     });
+
+    update_last_requests();
 
 });

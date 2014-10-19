@@ -1,6 +1,6 @@
 class RequestsController < ApplicationController
   def index
-    render json: Request.all, root: false, status: :ok
+    render json: Request.limit(15).order('created_at desc').all, root: false, status: :ok
   end
 
   def create

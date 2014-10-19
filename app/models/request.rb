@@ -10,6 +10,7 @@ class Request < ActiveRecord::Base
     request = Request.create! params
     request.build_entities
     if request.entities.present?
+      request.save!
       request
     else
       nil
