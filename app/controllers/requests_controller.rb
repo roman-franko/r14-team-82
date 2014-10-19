@@ -9,7 +9,7 @@ class RequestsController < ApplicationController
   end
 
   def show
-    render json: Request.find(params[:id]), root: false, status: :ok
+    render json: Request.find(params[:id]), scope: 'entities', root: false, status: :ok
   end
 
   private

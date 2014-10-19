@@ -55,7 +55,6 @@ RSpec.describe RequestsController, :type => :controller do
       before { get :show, id: request.id }
 
       it { expect(response).to be_success }
-      it { expect(JSON.parse response.body).to include('id') }
     end
 
     context 'failure' do
