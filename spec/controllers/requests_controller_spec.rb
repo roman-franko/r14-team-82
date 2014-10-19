@@ -13,18 +13,19 @@ RSpec.describe RequestsController, :type => :controller do
     it { expect(response).to be_success }
     it { expect(JSON.parse(response.body).size).to eq 2 }
     it { expect(JSON.parse(response.body).first).to include('id') }
+    it { expect(JSON.parse(response.body).first).to include('entities') }
   end
 
   describe "POST create" do
     context 'success' do
       it "returns http success" do
-        post :create, entities: ['C++', 'Java', 'Ruby']
+        post :create, entities: 'C++, Java, Ruby'
         expect(response).to be_success
       end
 
       it 'creates Request' do
         expect {
-          post :create, entities: ['C++', 'Java', 'Ruby']
+          post :create, entities: 'C++, Java, Ruby'
         }.to change{ Request.count }.by(1)
       end
     end
