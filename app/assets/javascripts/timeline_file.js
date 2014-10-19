@@ -270,10 +270,12 @@ $(document).ready(function() {
 
     $('.show-chronology').click(function() {
       keywords = $('#timeline form textarea').val();
+      document.body.style.cursor  = 'wait';
 
       $.post('requests',
              { request_string:keywords },
              function(data) {
+                document.body.style.cursor  = 'default';
                 if (data) {
                       var timeline = {
                         "timeline":
