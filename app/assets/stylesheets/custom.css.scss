@@ -1,11 +1,18 @@
 body {
   position: relative;
+  padding-top: 70px;
 }
 
-.row form {
+.row form, .row#last {
   padding: 15px;
 }
 
 #timeline {
   padding-top: 50px;
 }
+
+.navbar-default  {
+  padding-top:5px;
+  background-color: #e9e9e9;
+}
+

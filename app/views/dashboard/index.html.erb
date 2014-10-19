@@ -1,13 +1,13 @@
 
-<div class="navbar navbar-fixed-top">
-  <div class="container-fluid">
-  <div class="nav-collapse" id="scrollnav">
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid" id="scrollnav">
+    
     <ul class="nav nav-pills">
       <li> <%= image_tag("logo.png") %></li>
       <li> <a href="#description" data-scroll="true" >Description </a> </li>
       <li> <a href="#timeline" data-scroll="true" >Create hronology </a>  </li>
     </ul>
-  </div>
+
   </div>
 </div>
 <div class="container-fluid">
@@ -27,11 +27,12 @@
 
   </div>
   <div class="row" id="timeline">
-
-      <%= render 'form' %>
-
-
-    <div id="time_line"></div> 
-
+    <%= render 'form' %>
+    <div id="time_line"></div>
+  </div>
+  <div class="row" id="last">
+  <h3>Last requests: </h3>
+    <ul>
+    </ul>
   </div>
 </div>
