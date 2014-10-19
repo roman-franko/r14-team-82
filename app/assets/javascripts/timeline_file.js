@@ -2,10 +2,16 @@
     data = {
     "timeline":
        {
-           "headline":"Sh*t People Say",
+           "headline":"Results for comparison",
            "type":"default",
-       "text":"People say stuff",
+       "text":"request entities",
        "startDate":"2012,1,26",
+       "asset": 
+          {
+              "media":"/time-1.jpg",
+              "credit":"",
+              "caption":""
+          },
            "date": [
                {
                    "startDate":"2011,12,12",

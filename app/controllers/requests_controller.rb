@@ -4,8 +4,8 @@ class RequestsController < ApplicationController
   end
 
   def create
-    request = Request.create person_params
-    render json: request, status: :created
+    request = Request.create_with_entities! permitted_params
+    render json: request, scope: 'entities', status: :created
   end
 
   def show
@@ -14,7 +14,7 @@ class RequestsController < ApplicationController
 
   private
 
-  def person_params
-    params.require(:entities)
+  def permitted_params
+    params.permit(:request_string)
   end
 end

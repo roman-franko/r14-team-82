@@ -2,6 +2,10 @@ require 'rails_helper'
 
 RSpec.describe RequestsController, :type => :controller do
 
+  before(:each) do
+    allow_any_instance_of(Request).to receive(:fetch_wiki_data).and_return([])
+  end
+
   describe "GET index" do
     before do
       create(:request)
@@ -19,13 +23,13 @@ RSpec.describe RequestsController, :type => :controller do
   describe "POST create" do
     context 'success' do
       it "returns http success" do
-        post :create, entities: 'C++, Java, Ruby'
+        post :create, request_string: 'C++, Java, Ruby'
         expect(response).to be_success
       end
 
       it 'creates Request' do
         expect {
-          post :create, entities: 'C++, Java, Ruby'
+          post :create, request_string: 'C++, Java, Ruby'
         }.to change{ Request.count }.by(1)
       end
     end
@@ -33,7 +37,7 @@ RSpec.describe RequestsController, :type => :controller do
     context 'failure' do
       it "returns http bad_request" do
         post :create
-        expect(response).to have_http_status(:bad_request)
+        expect(response).to have_http_status(:unprocessable_entity)
       end
 
       it 'creates Request' do
