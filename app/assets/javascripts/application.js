@@ -12,8 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
-//= require_tree .
-//=require timelineJS/embed
-//= require jquery
+//= require timelineJS/embed
 //= require bootstrap-sprockets
+//= require scrollspy
+//= require timeline_file
