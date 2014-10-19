@@ -4,8 +4,8 @@ class RequestsController < ApplicationController
   end
 
   def create
-    Request.find_entities person_params
-    render nothing: true, status: :created
+    request = Request.create person_params
+    render json: request, status: :created
   end
 
   def show

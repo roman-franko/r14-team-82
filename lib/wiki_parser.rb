@@ -3,7 +3,7 @@ require 'wikipedia'
 # Usage:
 # require 'wiki_parser'
 # w =  WikiParser.new
-# w.load('Putin')
+# w.load('Java')
 # w.start_date
 # w.end_date
 # w.title

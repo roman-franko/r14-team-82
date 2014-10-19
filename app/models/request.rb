@@ -1,4 +1,5 @@
 class Request < ActiveRecord::Base
+  has_many :requests_entities
   has_many :entities, through: :requests_entities
 
 
