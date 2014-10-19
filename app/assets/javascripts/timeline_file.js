@@ -1,14 +1,13 @@
 $(document).ready(function() {
   var d = new Date();
   var today = d.getFullYear().toString() + "," + (d.getMonth() +1 ).toString() + "," + d.getDate().toString()
-  console.log(today)
-
+  
   timeline = {
       "timeline":
        {
-           "headline":"Request results",
+           "headline":"Chronoscope",
            "type":"default",
-            "text":"Try our chronoscope!",
+            "text":"Try it!",
             "startDate":today,
             "asset":
               {
@@ -46,9 +45,9 @@ $(document).ready(function() {
                       var timeline = {
                         "timeline":
                          {
-                         "headline":"Results for comparison",
+                         "headline":"Results for",
                          "type":"default",
-                         "text":"request entities",
+                         "text":keywords ,
                          "startDate":"2012,1,26",
                          "asset":
                             {
