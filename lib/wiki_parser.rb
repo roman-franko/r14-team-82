@@ -41,7 +41,7 @@ class WikiParser
   end
 
   def valid?
-    start_date.present? || end_date.present?
+    start_date.present?
   end
 
   private

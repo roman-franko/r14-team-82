@@ -21,7 +21,6 @@ class Request < ActiveRecord::Base
     entities_arr = request_string.split(',').map { |entity| entity.gsub(/(\A\s*)|(\s*\z)/, '') }
     entities_arr.each do |entity|
       w.load(entity)
-      p "w.valid? #{w.valid?}"
       if w.valid?
         entities << Entity.create(start_date: w.start_date,
           end_date: w.end_date,
@@ -31,7 +30,4 @@ class Request < ActiveRecord::Base
       end
     end
   end
-
-  private
-
 end

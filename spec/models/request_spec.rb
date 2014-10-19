@@ -32,7 +32,17 @@ RSpec.describe Request, :type => :model do
         text: 'text',
         media: 'http://ex.com'
       }
-      allow_any_instance_of(Request).to receive(:fetch_wiki_data).and_return(data)
+
+      wiki_parser = instance_double("WikiParser",
+        start_date: '2014-10-18',
+        end_date: '',
+        title: '',
+        title: '',
+        html: '',
+        url: '')
+      allow_any_instance_of(WikiParser).to receive(:new).and_return(wiki_parser)
+      allow(wiki_parser).to receive(:load)
+      # allow(wiki_parser).to receive(:valid?).at_least(3).times.and_return(true)
     end
 
     it 'creates entities' do
