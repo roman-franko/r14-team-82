@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    timeline = {
+  timeline = {
       "timeline":
        {
            "headline":"Results for comparison",
@@ -266,28 +266,41 @@ $(document).ready(function() {
        }
     };
 
+
+
     $('.show-chronology').click(function() {
-      console.log('ddd');
       keywords = $('#timeline form textarea').val();
 
       $.post('requests',
              { request_string:keywords },
              function(data) {
                 if (data) {
-                  //alert(data); // show response from the php script.
-                  //console.log({ "timeline": data});
-                  console.log(data);
+                      var timeline = {
+                        "timeline":
+                         {
+                         "headline":"Results for comparison",
+                         "type":"default",
+                         "text":"request entities",
+                         "startDate":"2012,1,26",
+                         "asset":
+                            {
+                                "media":"/time-1.jpg",
+                                "credit":"",
+                                "caption":""
+                            },
+                             "date": [ ]
+                         }
+                      };
 
+                  timeline.timeline.date =  $.parseJSON(data);
 
-                  timeline.timeline.date = data;
-
-                  console.log(timeline);
+                  $("#time_line").empty();
 
                   createStoryJS({
                     type: 'timeline',
                     width: '100%',
                     height: '500',
-                    source:  { "timeline": timeline},
+                    source:  timeline,
                     embed_id: 'time_line'
                   });
                 }
@@ -307,5 +320,5 @@ $(document).ready(function() {
       source: timeline, //get the events.json format from https://github.com/VeriteCo/TimelineJS#file-formats
       embed_id: 'time_line'
     });
-         console.log(timeline);
+
 });
