@@ -27,7 +27,7 @@ class Request < ActiveRecord::Base
       end_date: w.end_date,
       headline: w.title,
       text: w.html,
-      media: ''
+      media: w.url
     }
   end
 
