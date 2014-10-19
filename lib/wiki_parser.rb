@@ -54,7 +54,7 @@ class WikiParser
     if date_string
       date_string = date_string[/(?<==) *[-,\w ]+/]
       date = Date.parse(date_string)
-    else
+    elsif event == 'BIRTH'
       year_string = s[/year += (\{\{start date and age\|)?\d+/]
       if year_string
         year = year_string[/\d+/]
