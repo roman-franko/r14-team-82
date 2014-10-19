@@ -1,12 +1,12 @@
-  $(document).ready(function() {
-    data = {
-    "timeline":
+$(document).ready(function() {
+    timeline = {
+      "timeline":
        {
            "headline":"Results for comparison",
            "type":"default",
        "text":"request entities",
        "startDate":"2012,1,26",
-       "asset": 
+       "asset":
           {
               "media":"/time-1.jpg",
               "credit":"",
@@ -264,12 +264,48 @@
                }
            ]
        }
-    }
+    };
+
+    $('.show-chronology').click(function() {
+      console.log('ddd');
+      keywords = $('#timeline form textarea').val();
+
+      $.post('requests',
+             { request_string:keywords },
+             function(data) {
+                if (data) {
+                  //alert(data); // show response from the php script.
+                  //console.log({ "timeline": data});
+                  console.log(data);
+
+
+                  timeline.timeline.date = data;
+
+                  console.log(timeline);
+
+                  createStoryJS({
+                    type: 'timeline',
+                    width: '100%',
+                    height: '500',
+                    source:  { "timeline": timeline},
+                    embed_id: 'time_line'
+                  });
+                }
+             },
+             'json'
+           );
+
+      return false; // avoid to execute the actual submit of the form.
+
+    });
+
+
     createStoryJS({
       type: 'timeline',
       width: '100%',
       height: '500',
-      source: data, //get the events.json format from https://github.com/VeriteCo/TimelineJS#file-formats
+      source: timeline, //get the events.json format from https://github.com/VeriteCo/TimelineJS#file-formats
       embed_id: 'time_line'
     });
-  });
+         console.log(timeline);
+});
