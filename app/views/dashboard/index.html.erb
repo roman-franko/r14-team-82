@@ -14,19 +14,24 @@
   <div class="row" id="description">
 
     <p id="center"><%= image_tag("/logobig.jpg", alt: "Chronoscope") %></p>
-    <h4 id="text">"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"</h4>
-
+    <h4 id="text">Chronoscope is purposed for building chronology. It searches objects, which you are interested in, using Wikipedia, grabs dates, some useful information and link to wiki page and displays that data in chronological order.
+    <br>Try it! 
+    <br>Here are some interesting examples, that are already done by chronoscope:</h4>
+    <h4  id="text">
+      <%= render 'examples' %>
+    </h4>
   </div>
   <div class="row" id="timeline">
     <%= render 'form' %>
     <div id="time_line"></div>
   </div>
   <div class="row" id="last">
-  <h3>Last requests: </h3>
-    <ul>
-    </ul>
+    <h3>Last requests: </h3>
+    <h4>
+      <%= render 'last_requests' %>
+    </h4>
   </div>
 </div>
 <footer>
-  <h5 id="center" > Black Magic </h4>
+  <h5 id="center" > Black Magic </h5>
 </footer>
