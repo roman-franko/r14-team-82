@@ -1,16 +1,17 @@
 function update_last_requests(){
   $.get("requests", function( data ) {
-    var s = ''
+    var s = '';
     $.each(data, function( index, value ) {
+      var id = value['id'];
       if (value.entities) {
-        s += "<a class = 'keyword'>"+value.entities+"</a>" + '; ';
+        s += "<a class = 'keyword' id="+id+">"+value.entities+"</a>" + '<br>';
       }
     });
     s = s.substring(0, s.length - 2);
     $('.last-requests').html( s );
     $('.keyword').click(function() {
-      keywords = $( this ).text();
-      show_chronology(keywords);
+      var id = $(this).attr('id');
+      get_chronology(id);
     });
   });
 };
@@ -55,6 +56,42 @@ function show_chronology(keywords) {
     },
     'json'
   );
+};
+
+function get_chronology(id) {
+  $.get("requests/"+id, function( data ) {
+    if (data) {
+      var timeline = {
+        "timeline":
+         {
+         "headline":"Results for comparison",
+         "type":"default",
+         "text":"request entities",
+         "startDate":"2012,1,26",
+         "asset":
+            {
+                "media":"/time-1.jpg",
+                "credit":"",
+                "caption":""
+            },
+             "date": [ ]
+         }
+      };
+
+      timeline.timeline.date =  $.parseJSON(data);
+
+      $("#time_line").empty();
+
+      createStoryJS({
+        type: 'timeline',
+        width: '100%',
+        height: '500',
+        source:  timeline,
+        embed_id: 'time_line'
+      });
+      update_last_requests();
+    }
+  });
 };
 
 $(document).ready(function() {
